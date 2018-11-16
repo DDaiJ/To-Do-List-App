@@ -6,17 +6,13 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 
-
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.Month;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Controller {
 
@@ -73,9 +69,12 @@ public class Controller {
     public void showNewItemDialog() {
         Dialog<ButtonType> dialog = new Dialog<>();
         dialog.initOwner(mainBorderPane.getScene().getWindow());
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("todoItemDialog.fxml"));
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("todoItemDialog.fxml"));
-            dialog.getDialogPane().setContent(root);
+//            Parent root = FXMLLoader.load(getClass().getResource("todoItemDialog.fxml"));
+////            dialog.getDialogPane().setContent(root);
+            dialog.getDialogPane().setContent(fxmlLoader.load());
         } catch (IOException e) {
             System.out.println("Couldn't load the dialog");
             e.printStackTrace();
@@ -84,6 +83,16 @@ public class Controller {
 
         dialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
         dialog.getDialogPane().getButtonTypes().add(ButtonType.CANCEL);
+
+        Optional<ButtonType> result = dialog.showAndWait();
+        if(result.isPresent() && result.get() == ButtonType.OK) {
+            DialogController controller = fxmlLoader.getController();
+            controller.processResult();
+            todoListView.getItems().setAll(TodoData.getInstance().getTodoItems());
+            System.out.println("Ok pressed");
+        } else {
+            System.out.println("cancel pressed");
+        }
     }
 
     @FXML
@@ -91,12 +100,13 @@ public class Controller {
         TodoItem item = todoListView.getSelectionModel().getSelectedItem();
         itemDetails.setText("\n" + item.getDetails());
         deadLineLabel.setText(item.getDeadline().toString());
-//        StringBuilder sb = new StringBuilder(item.getDetails());
-//        sb.append("\n\n\n\n");
-//        sb.append("Due: ");
-//        sb.append(item.getDeadline().toString());
-//        itemDetails.setText(sb.toString());
+        /*
+        StringBuilder sb = new StringBuilder(item.getDetails());
+        sb.append("\n\n\n\n");
+        sb.append("Due: ");
+        sb.append(item.getDeadline().toString());
+        itemDetails.setText(sb.toString());
+        */
     }
-
 
 }

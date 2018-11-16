@@ -15,7 +15,7 @@
         <MenuBar>
             <Menu text="File">
                 <items>
-                    <MenuItem text="Create new reminder"/>
+                    <MenuItem text="Create new reminder" onAction="#showNewItemDialog"/>
                     <SeparatorMenuItem/>
                     <MenuItem text="Exit"/>
                 </items>
