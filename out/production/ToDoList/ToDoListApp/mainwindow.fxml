@@ -28,7 +28,7 @@
         </ListView>
     </left>
     <center>
-        <VBox style="-fx-background-color: lightpink">
+        <VBox style="-fx-background-color: #e1c4cd">
             <HBox>
                 <Label text="Due: " textFill="darkred">
                     <font>

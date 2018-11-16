@@ -9,7 +9,7 @@
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SeparatorMenuItem?>
-<BorderPane fx:controller="ToDoListApp.Controller"
+<BorderPane fx:id="mainBorderPane" fx:controller="ToDoListApp.Controller"
             xmlns:fx="http://javafx.com/fxml">
     <top>
         <MenuBar>
@@ -28,7 +28,7 @@
         </ListView>
     </left>
     <center>
-        <VBox style="-fx-background-color: lightpink">
+        <VBox style="-fx-background-color: #e1c4cd">
             <HBox>
                 <Label text="Due: " textFill="darkred">
                     <font>
