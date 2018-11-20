@@ -41,7 +41,7 @@
                     </font>
                 </Label>
             </HBox>
-            <TextArea fx:id="itemDetails" VBox.vgrow="ALWAYS"/>
+            <TextArea fx:id="itemDetails" VBox.vgrow="ALWAYS" wrapText="true"/>
         </VBox>
 
     </center>

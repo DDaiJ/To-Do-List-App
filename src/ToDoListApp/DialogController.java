@@ -17,11 +17,13 @@ public class DialogController {
     @FXML
     private DatePicker deadlinePicker;
 
-    public void processResult() {
+    public TodoItem processResult() {
         String shortDescription = shortDescriptionField.getText().trim();
         String details = detailsArea.getText().trim();
         LocalDate deadline = deadlinePicker.getValue();
 
-        TodoData.getInstance().addTodoItem(new TodoItem(shortDescription, details, deadline));
+        TodoItem newItem = new TodoItem(shortDescription, details, deadline);
+        TodoData.getInstance().addTodoItem(newItem);
+        return newItem;
     }
 }
